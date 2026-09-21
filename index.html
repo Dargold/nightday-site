@@ -124,7 +124,8 @@ a{color:inherit}
 
 /* глифы-знаки направлений */
 .g{display:inline-block;flex:none;width:14px;height:14px;position:relative}
-.g-fire::before{content:"";position:absolute;left:50%;top:-2px;width:2px;height:18px;background:var(--red);transform:rotate(35deg)}
+.g-fire{width:auto;height:auto;font-size:15px;line-height:1;font-style:normal}
+.g-fire::before{content:"🔥"}
 .g-kj{border:1.5px solid var(--pearl);border-radius:50%}
 .g-led{background:linear-gradient(135deg,var(--cyan),var(--magenta));box-shadow:0 0 10px rgba(0,234,255,.6)}
 
@@ -202,14 +203,9 @@ a{color:inherit}
 .reel-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
 .reel .ph{position:absolute;inset:0;z-index:0}
 .reel::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.65));pointer-events:none}
-.play{
-  position:absolute;left:50%;top:50%;z-index:3;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;
-  border:1px solid rgba(255,255,255,.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);background:rgba(255,255,255,.08);
-  transition:transform .35s cubic-bezier(.2,.8,.2,1),background .3s;
-}
-.play::before{content:"";position:absolute;left:34px;top:28px;border-left:22px solid #fff;border-top:14px solid transparent;border-bottom:14px solid transparent}
-.reel:hover .play{transform:scale(1.1);background:rgba(255,255,255,.18)}
-.reel-meta{position:absolute;left:24px;bottom:22px;right:24px;z-index:3;font-weight:500;font-size:1.05rem}
+.reel-meta{position:absolute;left:24px;bottom:22px;right:24px;z-index:3;font-weight:500;font-size:1.05rem;display:flex;align-items:center;gap:10px}
+.reel-meta::after{content:"";width:14px;height:14px;border:1.5px solid currentColor;border-radius:3px;border-left-color:transparent;border-bottom-color:transparent;opacity:.8}
+.reel:hover .reel-meta{text-decoration:underline;text-underline-offset:4px}
 
 .facts{display:grid;gap:34px}
 .fact h3{margin:0 0 8px;font-size:1.12rem;font-weight:500;display:flex;align-items:center;gap:12px}
@@ -236,7 +232,7 @@ a{color:inherit}
   border:3px solid rgba(255,140,50,.7);border-left-color:transparent;border-bottom-color:transparent;
   filter:blur(1px) drop-shadow(0 0 14px #ff5a1a);animation:spin 1.1s linear infinite;
 }
-.theme-fire .fact h3::before{content:"";width:2px;height:18px;background:var(--red);transform:rotate(35deg);flex:none}
+.theme-fire .fact h3::before{content:"🔥";font-size:.95em;flex:none}
 .theme-fire .formats li{border-color:rgba(200,16,46,.35)}
 
 /* ---------- поток (КЖ) — сплошные буквы, стекло только под текстом ---------- */
@@ -297,9 +293,9 @@ a{color:inherit}
 .about-text p{margin:0 0 18px;font-size:clamp(1.05rem,1.4vw,1.2rem);font-weight:300;max-width:52ch}
 .about-text p:first-child{color:var(--text)}
 .about-text p+p{color:var(--muted)}
-.track{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:clamp(48px,7vw,80px);padding-top:28px;border-top:1px solid var(--line)}
+.track{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:clamp(28px,5vw,64px);margin-top:clamp(48px,7vw,80px);padding-top:28px;border-top:1px solid var(--line)}
 .track h3{margin:0 0 8px;font-size:.95rem;font-weight:500;color:var(--muted)}
-.track p{margin:0;font-size:1.05rem}
+.track p{margin:0;font-size:clamp(1.2rem,1.9vw,1.6rem);font-weight:300;line-height:1.35;max-width:40ch}
 @media (max-width:860px){.about-grid{grid-template-columns:1fr}.track{grid-template-columns:1fr}}
 
 /* =========================================================
@@ -458,21 +454,20 @@ details p{margin-top:8px!important}
       <!-- data-video: ролик (в превью крутится без звука, по клику — со звуком); data-poster: кадр до загрузки -->
       <button class="reel" data-video="video/fire.mp4" data-poster="video/fire.jpg" data-title-key="fire.clip">
         <span class="ph" aria-hidden="true"></span>
-        <span class="play" aria-hidden="true"></span>
-        <span class="reel-meta" data-i18n="reel.watch">Watch a clip</span>
+        <span class="reel-meta" data-i18n="reel.watch">Watch in full</span>
       </button>
       <div class="facts">
         <div class="fact">
           <h3 data-i18n="fact.what">What it is</h3>
-          <p data-i18n="fire.what">A fire performance with poi, staff and snakes, finished with fire breathing. The length and program are built around your event, from a short finale to a full set.</p>
-        </div>
-        <div class="fact">
-          <h3 data-i18n="fact.why">What it gives your event</h3>
-          <p data-i18n="fire.why">The moment guests remember and film. It works at festivals, weddings, birthdays, corporate evenings, retreats and music events.</p>
+          <p data-i18n="fire.what">A fire show with poi, fire staff or snakes. Fire breathing throughout the performance adds a spectacle that leaves no one indifferent.</p>
         </div>
         <div class="fact">
           <h3 data-i18n="fact.unique">What makes it different</h3>
-          <p data-i18n="fire.unique">No two shows are the same. I build each one around the venue, the music and the mood of the evening, or perform to your own brief.</p>
+          <p data-i18n="fire.unique">No two shows are the same. I build each one around the venue, the music and the mood of the evening, or perform to your own brief. It's the moment guests remember and film.</p>
+        </div>
+        <div class="fact">
+          <h3 data-i18n="fact.why">Where it fits</h3>
+          <p data-i18n="fire.why">Festivals, weddings, birthdays, corporate events, retreats and music events. Outdoors or at any venue that allows open fire.</p>
         </div>
         <ul class="formats">
           <li data-i18n="fire.f1">Poi</li><li data-i18n="fire.f2">Staff</li><li data-i18n="fire.f3">Snakes</li><li data-i18n="fire.f4">Fire breathing</li><li data-i18n="fire.f5">Any length</li>
@@ -488,26 +483,25 @@ details p{margin-top:8px!important}
     <div class="show-head">
       <div class="kind"><i class="g g-kj"></i><span data-i18n="kj.kind">Contact juggling</span></div>
       <h2 class="split" data-i18n="kj.title">Flow</h2>
-      <p class="lead" data-i18n="kj.lead">A single clear sphere that seems to float on its own. Quiet, hypnotic and close enough to touch.</p>
+      <p class="lead" data-i18n="kj.lead">A clear sphere that seems to float on its own. Quiet, hypnotic and close enough to touch.</p>
     </div>
     <div class="show-grid">
       <button class="reel" data-video="video/kj.mp4" data-poster="video/kj.jpg" data-title-key="kj.clip">
         <span class="ph" aria-hidden="true"><span class="orb"></span></span>
-        <span class="play" aria-hidden="true"></span>
-        <span class="reel-meta" data-i18n="reel.watch">Watch a clip</span>
+        <span class="reel-meta" data-i18n="reel.watch">Watch in full</span>
       </button>
       <div class="facts">
         <div class="fact">
           <h3 data-i18n="fact.what">What it is</h3>
-          <p data-i18n="kj.what">Contact juggling with one acrylic ball: the sphere rolls across hands, arms and body without ever being thrown. It works on stage and right next to your guests.</p>
-        </div>
-        <div class="fact">
-          <h3 data-i18n="fact.why">What it gives your event</h3>
-          <p data-i18n="kj.why">A perfect fit where open fire isn't allowed: indoor venues, dinners, retreats, presentations. Calm, elegant and fascinating at any age.</p>
+          <p data-i18n="kj.what">Contact juggling with an acrylic sphere: it rolls across hands, arms and body without ever being thrown.</p>
         </div>
         <div class="fact">
           <h3 data-i18n="fact.unique">What makes it different</h3>
-          <p data-i18n="kj.unique">Contact juggling is one of the rarest disciplines in flow art. Most guests have never seen it live, and it can hold a whole room in silence.</p>
+          <p data-i18n="kj.unique">Contact juggling is one of the rarest disciplines in flow art, and most guests have never seen it live. Calm and elegant, it fascinates at any age and can hold a whole room in silence.</p>
+        </div>
+        <div class="fact">
+          <h3 data-i18n="fact.why">Where it fits</h3>
+          <p data-i18n="kj.why">Restaurants, dinners, retreats, presentations and exhibitions: anywhere open fire isn't allowed. On stage or right among your guests, indoors or outdoors.</p>
         </div>
         <ul class="formats">
           <li data-i18n="kj.f1">Stage</li><li data-i18n="kj.f2">Among guests</li><li data-i18n="kj.f3">Indoors</li><li data-i18n="kj.f4">No fire</li>
@@ -528,24 +522,23 @@ details p{margin-top:8px!important}
     <div class="show-grid">
       <button class="reel" data-video="video/led.mp4" data-poster="video/led.jpg" data-title-key="led.clip">
         <span class="ph" aria-hidden="true"></span>
-        <span class="play" aria-hidden="true"></span>
-        <span class="reel-meta" data-i18n="reel.watch">Watch a clip</span>
+        <span class="reel-meta" data-i18n="reel.watch">Watch in full</span>
       </button>
       <div class="facts">
         <div class="fact">
           <h3 data-i18n="fact.what">What it is</h3>
-          <p data-i18n="led.what">An LED performance with poi, staff and snakes. Bright, colourful and completely safe.</p>
-        </div>
-        <div class="fact">
-          <h3 data-i18n="fact.why">What it gives your event</h3>
-          <p data-i18n="led.why">Ideal for dark halls, clubs, children's parties and any venue where open fire is off limits.</p>
+          <p data-i18n="led.what">A light show with LED poi. Bright, colourful and completely safe: no flame, no smoke.</p>
         </div>
         <div class="fact">
           <h3 data-i18n="fact.unique">What makes it different</h3>
           <p data-i18n="led.unique">Colours and pace are chosen for your event, from a calm glow to a full psychedelic set.</p>
         </div>
+        <div class="fact">
+          <h3 data-i18n="fact.why">Where it fits</h3>
+          <p data-i18n="led.why">Dark halls, clubs, parties, children's events and any venue where open fire is off limits.</p>
+        </div>
         <ul class="formats">
-          <li data-i18n="led.f1">LED poi</li><li data-i18n="led.f2">LED staff</li><li data-i18n="led.f3">Indoors</li><li data-i18n="led.f4">Safe for kids</li>
+          <li data-i18n="led.f1">LED poi</li><li data-i18n="led.f3">Indoors</li><li data-i18n="led.f4">Safe for kids</li>
         </ul>
       </div>
     </div>
@@ -558,22 +551,18 @@ details p{margin-top:8px!important}
     <div class="about-grid">
       <h2>NightDay<small data-i18n="nav.name">Maxim Shatskikh</small></h2>
       <div class="about-text">
-        <p data-i18n="about.p1">I started spinning poi at 12, inspired by my mum, who was learning it herself at the time. Within a couple of years I had overtaken her and began teaching others. At 18 I added contact juggling, one of the rarest disciplines in flow art.</p>
+        <p data-i18n="about.p1">I started spinning poi at 12 (2016), inspired by my mum, who was learning it herself at the time. Over a few years my skills grew a lot: I began performing and passing my knowledge on to others. In 2022 I added contact juggling, one of the rarest disciplines in flow art.</p>
         <p data-i18n="about.p2">For me, every show is a conversation with the space, the music and the people in it. That's why I never perform the same show twice.</p>
       </div>
     </div>
     <div class="track">
       <div>
-        <h3 data-i18n="about.geoH">Performed in</h3>
-        <p data-i18n="about.geo">Russia, India, Vietnam, Egypt and Kazakhstan</p>
+        <h3 data-i18n="about.geoH">Countries</h3>
+        <p data-i18n="about.geo">Russia, India, Vietnam, Egypt, Kazakhstan</p>
       </div>
       <div>
-        <h3 data-i18n="about.festH">Festivals, with teams</h3>
-        <p data-i18n="about.fest">Wild Mint, Foure, Sunchill</p>
-      </div>
-      <div>
-        <h3 data-i18n="about.soloH">Solo</h3>
-        <p data-i18n="about.solo">Weddings, birthdays, corporate events, retreats and music events</p>
+        <h3 data-i18n="about.evH">Events</h3>
+        <p data-i18n="about.ev">Weddings, birthdays, corporate events, retreats, music events and festivals (“Wild Mint”, “Foure”, “Sunchill”)</p>
       </div>
     </div>
   </div>
@@ -728,36 +717,38 @@ details p{margin-top:8px!important}
 /* ================= ПЕРЕВОДЫ ================= */
 const I18N = {
   ru: {
+    'about.ev':'Свадьбы, дни рождения, корпоративы, ретриты, музыкальные события и фестивали («Дикая мята», «Foure», «Sunchill»)',
+    'about.evH':'Мероприятия',
     'meta.title':'NightDay — фаершоу, контактное жонглирование и LED-шоу',
     'nav.name':'Максим Шацких','nav.fire':'Фаершоу','nav.kj':'Контактное жонглирование','nav.led':'LED-шоу','nav.about':'Обо мне','nav.cta':'Забронировать',
     'hero.title':'Сделайте ваше событие незабываемым',
     'hero.sub':'Магия флоу-арта от NightDay: огонь, контактное жонглирование и свет. Каждое шоу я собираю под вашу площадку.',
     'hero.cta':'Забронировать дату',
-    'reel.watch':'Смотреть пример',
-    'fact.what':'Что это','fact.why':'Что это даст вашему событию','fact.unique':'В чём особенность',
+    'reel.watch':'Смотреть полностью',
+    'fact.what':'Что это','fact.why':'Где уместно','fact.unique':'В чём особенность',
     'fire.kind':'Фаершоу','fire.title':'Огонь','fire.clip':'Фаершоу: пример выступления',
-    'fire.lead':'Живой огонь, который движется под музыку. Пои, стафф, снейки и огненное дыхание, собранные в одно выступление.',
-    'fire.what':'Огненное шоу с пои, стаффом и снейками, а в финале огненное дыхание. Длительность и программу собираю под ваше событие: от короткого финального номера до полноценного сета.',
-    'fire.why':'Момент, который гости запомнят и снимут на телефоны. Подходит для фестивалей, свадеб, дней рождения, корпоративов, ретритов и музыкальных событий.',
-    'fire.unique':'Двух одинаковых шоу не бывает. Я собираю каждое под площадку, музыку и настроение вечера или выступаю по вашему запросу.',
-    'fire.f1':'Пои','fire.f2':'Стафф','fire.f3':'Снейки','fire.f4':'Огненное дыхание','fire.f5':'Любая длительность',
+    'fire.lead':'Живой огонь, который движется под музыку. Пои, посох, снейки и дыхание огня, собранные в одно выступление.',
+    'fire.what':'Огненное шоу с пои, огненным посохом или снейками. Зрелищности добавляет дыхание огня на протяжении всего выступления: оно никого не оставит равнодушным.',
+    'fire.why':'Фестивали, свадьбы, дни рождения, корпоративы, ретриты и музыкальные события. На улице или на любой площадке, где разрешён открытый огонь.',
+    'fire.unique':'Двух одинаковых шоу не бывает. Я собираю каждое под площадку, музыку и настроение вечера или выступаю по вашему запросу. Это момент, который гости запомнят и снимут на телефоны.',
+    'fire.f1':'Пои','fire.f2':'Посох','fire.f3':'Снейки','fire.f4':'Дыхание огня','fire.f5':'Любая длительность',
     'kj.kind':'Контактное жонглирование','kj.title':'Поток','kj.clip':'Контактное жонглирование: пример',
-    'kj.lead':'Одна прозрачная сфера, которая будто парит сама по себе. Тихо, гипнотично и совсем рядом.',
-    'kj.what':'Контактное жонглирование с одним акриловым шаром: сфера катится по ладоням, рукам и телу, ни разу не взлетая в воздух. Можно на сцене и в шаге от гостей.',
-    'kj.why':'Идеально там, где открытый огонь запрещён: залы, ужины, ретриты, презентации. Спокойно, элегантно и завораживает в любом возрасте.',
-    'kj.unique':'Контактное жонглирование — одно из самых редких направлений флоу-арта. Большинство гостей никогда не видели его вживую, и оно способно удержать тишину во всём зале.',
+    'kj.lead':'Прозрачная сфера, которая будто парит сама по себе. Тихо, гипнотично и совсем рядом.',
+    'kj.what':'Контактное жонглирование с акриловым шаром: сфера катится по ладоням, рукам и телу, ни разу не взлетая в воздух.',
+    'kj.why':'Рестораны, ужины, ретриты, презентации и выставки — везде, где открытый огонь запрещён. На сцене или прямо среди гостей, в помещении и на улице.',
+    'kj.unique':'Контактное жонглирование — одно из самых редких направлений флоу-арта, и большинство гостей никогда не видели его вживую. Спокойный и элегантный номер завораживает в любом возрасте и способен удержать тишину во всём зале.',
     'kj.f1':'Сцена','kj.f2':'Среди гостей','kj.f3':'В помещении','kj.f4':'Без огня',
     'led.kind':'LED-шоу','led.title':'Свет','led.clip':'LED-шоу: пример',
     'led.lead':'Свет вместо пламени. Светящийся реквизит рисует в воздухе узоры и цвета в такт музыке.',
-    'led.what':'Световое шоу с LED-пои, стаффом и снейками. Ярко, красочно и полностью безопасно.',
-    'led.why':'Для тёмных залов, клубов, детских праздников и любых площадок, где открытый огонь нельзя.',
+    'led.what':'Световое шоу с LED-пои. Ярко, красочно и полностью безопасно: ни пламени, ни дыма.',
+    'led.why':'Тёмные залы, клубы, вечеринки, детские праздники и любые площадки, где открытый огонь запрещён.',
     'led.unique':'Цвета и темп подбираю под ваше событие: от спокойного свечения до полноценного психоделического сета.',
-    'led.f1':'LED-пои','led.f2':'LED-стафф','led.f3':'В помещении','led.f4':'Безопасно для детей',
-    'about.p1':'Я начал крутить пои в 12 лет, глядя на маму: она тогда сама осваивала это искусство и очень меня вдохновила. Через пару лет я обогнал её и начал преподавать. В 18 добавил контактное жонглирование, одно из самых редких направлений флоу-арта.',
+    'led.f1':'LED-пои','led.f3':'В помещении','led.f4':'Безопасно для детей',
+    'about.p1':'Я начал крутить пои в 12 лет (2016), глядя на маму: она тогда сама осваивала это искусство и очень меня вдохновила. За несколько лет мой уровень сильно вырос, я начал выступать и передавать свои знания другим. В 2022 году добавил контактное жонглирование — одно из самых редких направлений флоу-арта.',
     'about.p2':'Для меня каждое шоу — разговор с пространством, музыкой и людьми вокруг. Поэтому я никогда не повторяю одно и то же выступление.',
-    'about.geoH':'Выступал','about.geo':'В России, Индии, Вьетнаме, Египте и Казахстане',
-    'about.festH':'Фестивали в составе команд','about.fest':'«Дикая мята», Foure, Sunchill',
-    'about.soloH':'Соло','about.solo':'Свадьбы, дни рождения, корпоративы, ретриты и музыкальные события',
+    'about.geoH':'Страны','about.geo':'Россия, Индия, Вьетнам, Египет, Казахстан',
+    
+    
     'book.title':'Забронировать дату',
     'book.lead':'Расскажите о своём событии. Стоимость зависит от длительности и формата шоу, поэтому я пришлю персональное предложение в долларах.',
     's1.b':'Заявка','s1.s':'Дата, город и формат','s2.b':'Договор','s2.s':'Подпись онлайн и предоплата 50%',
@@ -787,36 +778,38 @@ const I18N = {
     'msg.ok':'Заявка отправлена. Отвечу в течение нескольких часов.','msg.err':'Заявка не отправилась. Напишите мне в Telegram или WhatsApp, контакты внизу страницы.'
   },
   zh: {
+    'about.ev':'婚礼、生日派对、企业活动、静修营、音乐活动和音乐节（“Wild Mint”、“Foure”、“Sunchill”）',
+    'about.evH':'演出场合',
     'meta.title':'NightDay — 火舞、接触杂耍与LED灯光秀',
     'nav.name':'Maxim Shatskikh','nav.fire':'火舞表演','nav.kj':'接触杂耍','nav.led':'LED灯光秀','nav.about':'关于我','nav.cta':'预约',
     'hero.title':'让您的活动难以忘怀',
     'hero.sub':'NightDay 的流动艺术魔法：火舞、接触杂耍与灯光。每一场表演都为您的场地量身打造。',
     'hero.cta':'预约档期',
-    'reel.watch':'观看视频',
-    'fact.what':'表演内容','fact.why':'为您的活动带来什么','fact.unique':'独特之处',
+    'reel.watch':'观看完整视频',
+    'fact.what':'表演内容','fact.why':'适合的场合','fact.unique':'独特之处',
     'fire.kind':'火舞表演','fire.title':'火','fire.clip':'火舞表演：视频片段',
     'fire.lead':'随音乐舞动的真实火焰。火流星、火棍、火蛇与喷火，融为一场完整的表演。',
-    'fire.what':'使用火流星、火棍和火蛇的火舞表演，并以喷火收尾。时长与节目根据您的活动编排，可以是简短的压轴节目，也可以是完整的一场演出。',
-    'fire.why':'宾客会记住并争相拍摄的时刻。适合音乐节、婚礼、生日、企业活动、静修营和音乐活动。',
-    'fire.unique':'没有两场一模一样的表演。我会根据场地、音乐和当晚的氛围编排每一场，也可以按照您的要求表演。',
+    'fire.what':'使用火流星、火棍或火蛇的火舞表演。贯穿整场演出的喷火更是令人叹为观止。',
+    'fire.why':'音乐节、婚礼、生日、企业活动、静修营和音乐活动。可在户外或任何允许明火的场地表演。',
+    'fire.unique':'没有两场一模一样的表演。我会根据场地、音乐和当晚的氛围编排每一场，也可以按照您的要求表演。这是宾客会记住并争相拍摄的时刻。',
     'fire.f1':'火流星','fire.f2':'火棍','fire.f3':'火蛇','fire.f4':'喷火','fire.f5':'时长可定制',
     'kj.kind':'接触杂耍','kj.title':'流','kj.clip':'接触杂耍：视频片段',
-    'kj.lead':'一颗透明的水晶球，仿佛自己漂浮在空中。安静、迷人，近在咫尺。',
-    'kj.what':'使用一颗亚克力水晶球的接触杂耍：球在手掌、手臂和身体上滚动，从不抛起。既可以在舞台上表演，也可以在宾客身边近距离表演。',
-    'kj.why':'非常适合禁止明火的场合：室内场地、晚宴、静修营、发布会。宁静、优雅，老少皆宜。',
-    'kj.unique':'接触杂耍是流动艺术中最稀有的项目之一。大多数宾客从未现场见过，它能让整个空间安静下来。',
+    'kj.lead':'透明的水晶球，仿佛自己漂浮在空中。安静、迷人，近在咫尺。',
+    'kj.what':'使用亚克力水晶球的接触杂耍：球在手掌、手臂和身体上滚动，从不抛起。',
+    'kj.why':'餐厅、晚宴、静修营、发布会和展览——任何禁止明火的场合。可以在舞台上，也可以在宾客之间，室内外皆可。',
+    'kj.unique':'接触杂耍是流动艺术中最稀有的项目之一，大多数宾客从未现场见过。它宁静而优雅，老少皆宜，能让整个空间安静下来。',
     'kj.f1':'舞台','kj.f2':'宾客之间','kj.f3':'室内','kj.f4':'无明火',
     'led.kind':'LED灯光秀','led.title':'光','led.clip':'LED灯光秀：视频片段',
     'led.lead':'以光代火。发光道具随音乐在空中描绘图案与色彩。',
-    'led.what':'使用LED流星球、LED棍和LED蛇的灯光表演。明亮、多彩，完全安全。',
-    'led.why':'适合暗场、夜店、儿童派对，以及所有禁止明火的场地。',
+    'led.what':'使用LED流星球的灯光表演。明亮、多彩，完全安全：没有火焰，也没有烟雾。',
+    'led.why':'暗场、夜店、派对、儿童活动，以及所有禁止明火的场地。',
     'led.unique':'色彩与节奏为您的活动挑选：从柔和的光晕到充满迷幻感的完整演出。',
-    'led.f1':'LED流星球','led.f2':'LED棍','led.f3':'室内','led.f4':'儿童安全',
-    'about.p1':'我12岁开始练习流星球，当时我的妈妈也在学习，她给了我很大的启发。几年后我的水平超过了她，并开始教学。18岁时我开始练习接触杂耍——流动艺术中最稀有的项目之一。',
+    'led.f1':'LED流星球','led.f3':'室内','led.f4':'儿童安全',
+    'about.p1':'我12岁（2016年）开始练习流星球，当时我的妈妈也在学习，她给了我很大的启发。几年间我的水平大幅提升，开始登台演出，并把自己的经验传授给他人。2022年，我开始练习接触杂耍——流动艺术中最稀有的项目之一。',
     'about.p2':'对我来说，每一场表演都是与空间、音乐和现场观众的对话。所以我从不重复同一场演出。',
-    'about.geoH':'演出足迹','about.geo':'俄罗斯、印度、越南、埃及、哈萨克斯坦',
-    'about.festH':'随团队参加的音乐节','about.fest':'Wild Mint（野薄荷）、Foure、Sunchill',
-    'about.soloH':'个人演出','about.solo':'婚礼、生日派对、企业活动、静修营和音乐活动',
+    'about.geoH':'演出国家','about.geo':'俄罗斯、印度、越南、埃及、哈萨克斯坦',
+    
+    
     'book.title':'预约档期',
     'book.lead':'请告诉我您的活动信息。价格取决于表演时长和形式，我会以美元为您发送个性化报价。',
     's1.b':'提交申请','s1.s':'日期、城市与形式','s2.b':'签订合同','s2.s':'在线签署并支付50%定金',
